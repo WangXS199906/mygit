@@ -81,19 +81,6 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/systemsetting',
-    component: Layout,
-    children: [
-      {
-          path: 'list',
-          name: 'SystemsettingList',
-          component: () => import('@/pages/systemsetting/List'),
-          meta: { title: '系统管理', icon: 'tree' }
-      
-      }
-    ]
-  },
-  {
     path: '/category',
     component: Layout,
     children: [
@@ -116,6 +103,17 @@ export const constantRoutes = [
           component: () => import('@/pages/product/List'),
           meta: { title: '产品管理', icon: 'tree' }
       
+      }
+    ]
+  },{
+    path: '/comment',
+    component: Layout,
+    children: [
+      {
+        path: 'list',
+        name: 'CommentList',
+        component: () => import('@/pages/comment/List'),
+        meta: { title: '评论管理', icon: 'tree' }
       }
     ]
   },

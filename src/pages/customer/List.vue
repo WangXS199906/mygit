@@ -103,9 +103,9 @@ export default {
             }).then(() => {
                 let url = "http://localhost:6677/customer/deleteById?id="+id;
                 request.get(url).then((response)=>{
-                  //刷新数据
+                  //1.刷新数据
                   this.loadData();
-                  //提示结果
+                  //2.提示结果
                 this.$message({
                     type: 'success',
                     message:response.message

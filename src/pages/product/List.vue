@@ -37,12 +37,11 @@
                         <el-input v-model="form.name"></el-input>
                     </el-form-item>
                     <el-form-item label="产品描述">
-                        <el-input v-model="form.description"></el-input>
+                        <el-input type="textarea" v-model="form.description"></el-input>
                     </el-form-item>
                     <el-form-item label="产品价格">
                         <el-input v-model="form.price"></el-input>
-                    </el-form-item>
-                    
+                    </el-form-item>                   
                     <el-form-item label="所属产品">
                          <el-select v-model="value" placeholder="请选择">
                             <el-option v-for="item in options" :key="item.value"
