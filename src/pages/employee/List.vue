@@ -14,7 +14,7 @@
         <el-table-column fixed="right" label="操作">
             <template v-slot="slot">
                 <a href="" @click.prevent="toDeleteHandler(slot.row.id)">删除</a>
-                <a href="" @click.prevent="toUpDateHandler">修改</a>
+                <a href="" @click.prevent="toUpDateHandler(slot.row)">修改</a>
             </template>
         </el-table-column>
 
@@ -125,13 +125,16 @@ export default {
             });
         },
         toAddHandlder(){
-            this.title="录入员工信息"
+            this.form = {
+            type:"employee"
+          }
             this.visible=true; 
         },
         closeModalHandler(){
             this.visible=false;
         },
-        toUpDateHandler(){
+        toUpDateHandler(row){
+            this.form = row;
             this.visible=true;
         }   
     },
