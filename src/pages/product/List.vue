@@ -3,7 +3,6 @@
         <!-- 按钮 -->
         <el-button type="success" size = "small" @click="toAddHandler">添加</el-button>
         <el-button size="small" type="danger">批量删除</el-button>
-
         <!-- 表格 -->
         <el-table :data="products">
             <el-table-column prop="id" label="编号"> </el-table-column>
@@ -40,10 +39,7 @@
                     </el-form-item>
                     <el-form-item label="产品价格">
                         <el-input v-model="form.price"></el-input>
-                    </el-form-item>
-
-                    
-                                       
+                    </el-form-item>                                     
                     <el-form-item label="所属分类">
                          <el-select v-model="value" placeholder="请选择">
                             <el-option v-for="item in options" 
@@ -55,12 +51,12 @@
                     </el-form-item>
                     <el-form-item label="产品描述">
                         <el-input type="textarea" v-model="form.description"></el-input>
-                    </el-form-item>
-                    
+                    </el-form-item>                   
                     <el-upload class="upload-demo"
-                        action="https://jsonplaceholder.typicode.com/posts/"
+                        action="http://134.175.154.93:6677/file/upload"
                         :on-preview="handlePreview" :on-remove="handleRemove"
-                        :file-list="fileList" list-type="picture">
+                        :file-list="fileList" 
+                        :on-success="uploadsuccessHandler">
                     <el-button size="small" type="primary">点击上传</el-button>
                     <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
                     </el-upload>
@@ -95,10 +91,10 @@ export default {
         },
         handleRemove(file, fileList) {
         console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
+        },
+        handlePreview(file) {
+            console.log(file);
+        },
         submitHandler(){
             //this.form 对象 ---字符串--> 后台 {type:'customer',age:12}
             // json字符串 '{"type":"customer","age":12}'
@@ -155,8 +151,15 @@ export default {
             this.visible=false;
         },
         toUpdateHandler(row){
+            this.fileList = [];
             this.form = row;
-          this.visible=true;
+            this.visible=true;
+        },
+        uploadsuccessHandler(response){
+            let photo = "http://134.175.154.93:8888/group1/"+response.data.id
+            //将图片地址设置到form中，便于一起提交后台
+            this.form.photo = photo;
+           //console.log(response)
         }   
     },
     //用于存放要向网页中存放的数据
@@ -165,9 +168,9 @@ export default {
             visible:false,
             products:[],
             form:{},
-             fileList:[],
+            fileList:[],
             options: [],
-                value: ''
+            value: ''
         }
     },
     created(){
